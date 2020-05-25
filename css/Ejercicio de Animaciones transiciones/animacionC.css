@@ -1,0 +1,20 @@
+.objeto{
+  background-color: pink;
+  height: 200px;
+  left: 200px;
+  position: relative;
+  top: 100px;
+  width: 200px;
+  animation: girar 2s linear 1;
+}
+
+@keyframes girar{
+
+  50%{
+    transform: scale(2);
+    background-color: purple;
+  }
+  100% {
+    transform: rotate(-90deg);
+  }
+}
