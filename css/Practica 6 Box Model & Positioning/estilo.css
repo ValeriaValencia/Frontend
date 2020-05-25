@@ -1,0 +1,35 @@
+.izquierdo {
+ background-color:blue;
+  width: 400px;
+   height: 300px;
+   float: left;
+  
+  }
+
+
+  .derecho{
+    background-color:blue;
+  width: 400px;
+   height: 300px;
+   float: right;
+  
+  }
+
+  .pie{
+    width: 100%;
+    height: 75px;
+    background-color: violet ;
+    float: left;
+}
+
+body{
+    background-image:url("fondo.jpg");
+    position: static;
+    }
+
+
+.segunda{
+    width: 800;
+    height: 450px;
+    background-color: coral
+}
