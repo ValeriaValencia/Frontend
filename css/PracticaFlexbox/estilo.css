@@ -1,0 +1,53 @@
+.barra {
+    background-color: #296d79 ;
+    
+    display: flex;
+    height: 30px;
+
+}
+
+.Section{
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+#Logo{
+    flex-grow: 1;
+}
+
+
+.description{
+    border: 2px solid blue;
+    display: flex;
+    flex-direction: row;
+   
+
+}
+
+.texto{
+    border: 2px solid green;
+    flex-grow: 1;
+    
+}
+
+.main-content{
+    border: 2px solid chocolate;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.imagen{
+    border: 10px aqua;
+    flex-direction: column;
+
+
+}
+
+.pie{
+    background-color:  #296d79 ;
+    color: white;
+    flex-direction: row;
+    height: 30px;
+   
+}
