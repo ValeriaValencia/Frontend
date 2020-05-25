@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computadora</title>
+  </head>
+  <body>
+    <button id="ajaxButton" type="button">Make a request</button>
+
+      <script>
+      var httpRequest;
+      
+      const miDiv = document.createElement('div');
+      document.body.appendChild(miDiv);
+
+      const makeRequest = () => {
+        httpRequest = new XMLHttpRequest();
+        fetch('http://demo6292426.mockable.io/persons')
+        .then(response => response.json())
+
+        .then(datos => {
+          datos.forEach(datosA => {
+            const pDato = document.createTextNode(datosA.name.first + ' ' + datosA.company + ' ' + datosA.email);
+            const p = document.createElement('p');          
+            p.appendChild(pDato);
+            miDiv.appendChild(p);
+
+              let edad = datos.reduce((acumulador,dato) => {
+                acumulador+=dato.age;
+                return acumulador;
+              },0)
+                console.log('la suma de las edades es:' + ' ' + edad);           
+          })
+
+          let colorOjos = datos.reduce((acumuladorOjos,ojos) => {
+                if(ojos.eyeColor === 'green'){
+                 return acumuladorOjos + 1
+                }else{
+                  return acumuladorOjos
+                   
+                }
+              },0) 
+              console.log('las personas con ojos verdes son:' + colorOjos);
+          
+          let frutaFav = datos.reduce((acumuladorF,frutas) => {
+                if(frutas.favoriteFruit === 'strawberry'){
+                 return acumuladorF + 1
+                }else{
+                  return acumuladorF
+                   
+                }
+              },0) 
+              console.log( frutaFav + ' ' + 'personas indican que su fruta favorita es fresa')
+          
+          
+        })
+        .catch(error => console.log('Error:', error));
+        }
+   
+        document.getElementById("ajaxButton").addEventListener('click', makeRequest);
+      
+      
+    </script>
+  </body>
+</html>
