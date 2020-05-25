@@ -1,0 +1,15 @@
+@media print {
+
+body{
+  background-color: purple;
+}
+
+h1 {
+  color: aquamarine;
+}
+
+table{
+  border: none;
+}
+
+} 
