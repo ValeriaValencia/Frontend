@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Forms HTML</title>
+</head>
+<body>
+    <form oninput="suma.value=parseInt(valorUno.value) + parseInt(valorDos.value)" action="" method="POST" enctype=""></form>
+
+    <p>Membresia de Super Heroe </p>
+    <fieldset id="datosPersonales">
+        <legend>Datos personales</legend>
+        <label for="Nombre">Escribe tu nombre</label>
+    <input type="text" name="Nom" id="Nombre" placeholder="Nombre">
+    <label for="Apellido">Escribe tu apellido</label>
+    <input type="text" name="Ap" id="Apellido" placeholder="Apellido">
+
+    <label for="Correo">Escribe tu correo</label>
+    <input type="text" name="Correo" id="Correo" placeholder="Correo" autofocus disabled oncopy="return false" onpaste="return false">
+
+    <label for="Contraseña">Escribe tu contraseña</label>
+    <input type="text" name="Contraseña" id="Contraseña" placeholder="Contraseña" autofocus disabled oncopy="return false" onpaste="return false">
+
+    <label for="cumple">Fecha de Cumpleaños</label>
+    <input id="cumple" type="date">
+
+    </fieldset>
+
+<br>
+<br>
+
+    <fieldset id="Poderes">
+        <legend>Poderes</legend>
+        <p>Elige un poder que peseas</p>
+    <select name="poder" id="Poderes">
+        <option value="volar">Volar</option>
+        <option value="fuerza">Super fuerza</option>
+        <option value="invisible">Invisibilidad</option>
+      </select>
+
+      <p>Elige tres habilidades que quieras poseer</p>
+
+      <textarea name="comentario" id="areaTexto" cols="80" rows="10">
+    </textarea>
+
+
+
+      <p>Genero</p>
+        <input type="radio" name="genero" value="hombre" id="hombre">
+        <input type="radio" name="genero" value="mujer" id="mujer">
+        <input type="radio" name="genero" value="otro" id="otro">
+
+    </fieldset>
+
+
+
+
+
+    <br>
+    <br>
+
+
+
+    <fieldset id="Seguridad">
+        <legend>Pregunta de seguridad</legend>
+        <label for="Seguridad">Personaje ciego de Marvel</label>
+    <input type="text" list="opSeguridad" name="Seg" id="Seguridad" placeholder="Seguridad">
+    <datalist id="opSeguridad">
+        <option value="iron man"></option>
+        <option value="spider man"></option>
+        <option value="deadpool"></option>
+        
+        </datalist>
+
+    <p>Dos numeros que sumados obtengas 4</p>
+
+    <label for="">Suma</label>
+    <input type="number" id="valorUno"><p>+</p>
+    <input type="number" id="valorDos">
+    <output name="suma" for="valorUno valorDos"></output>
+
+
+    </fieldset>
+
+    <textarea name="comentario" id="areaTexto" cols="80" rows="10">
+    </textarea>
+   <input type="checkbox" name="aceptar" id="aceptar">
+   <input type="checkbox" name="newsletter" id="newsletter">
+
+   <input type="reset" value="Limpiar">
+
+   <input type="submit" value="Enviar">
+
+
+
+
+
+
+</form>
+</body>
+</html>
