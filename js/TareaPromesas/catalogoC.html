@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  
+
+  .modal {
+    display: none;
+    position: relative;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(197, 180, 197, 0.2);
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  .primerDiv{
+    margin: auto;
+    padding: 10px;
+    background-color: #e6cffb;
+  }
+
+  .listaSeleccionados{
+    margin: auto;
+    padding: 10px;
+    background-color: #fbddfd;
+  }
+
+</style>
+<body>
+
+  <script>
+
+    const crearTag = (tag,className,id,textContent) => {
+      const element = document.createElement(tag);
+      element.className = className;
+      element.id = id;
+      element.textContent = textContent;
+      return element
+    }
+
+    const modalDiv = crearTag('div','modal','modalDiv','');
+    const ramDiv = crearTag('div','modal-content','ramDiv','');
+    const hddDiv = crearTag('div','modal-content','hddDiv','');
+    const procesadorDiv = crearTag('div','modal-content','procesadorDiv','');
+    const botonAceptar = crearTag('button','botonAceptar','botonAceptar','Aceptar');
+    const botonCancelar = crearTag('button','botonCancelar','botonCancelar','Cancelar' );
+    const listaSeleccionados = crearTag('div','listaSeleccionados','listaSeleccionados','');
+    const pTitulo = crearTag('h3','pTitulo','pTitulo','Elementos Seleccionados');
+
+   
+    const primerDiv = crearTag('div','primerDiv','primerDiv','');
+    const componentes = crearTag('h2','componente','','Componentes');
+    const botonRam = crearTag('button','botonRam','botonRam','Ram');
+    const botonHdd = crearTag('button','botonHdd','botonHdd','Hdd');
+    const botonProcesador = crearTag('button','botonProcesador','botonProcesador','Procesador');
+    primerDiv.appendChild(componentes);
+    primerDiv.appendChild(botonRam);
+    primerDiv.appendChild(botonHdd);
+    primerDiv.appendChild(botonProcesador);
+    document.body.appendChild(primerDiv)
+       
+     let arrayN = [];
+     let compras = [];
+     let a = 0;
+
+     function idNuevos() {             
+            let valor;
+            valor = this.id; //el id tiene el mismo valor que el elemento que seleccionaste
+            const pDatos = document.createTextNode(arrayN[valor]);
+            const p = document.createElement('p');
+            p.appendChild(pDatos);
+            listaSeleccionados.appendChild(p);           
+           }
+
+    async function ram() {
+      let respuesta = await fetch('https://demo6292426.mockable.io/ramMemory')
+      console.log(respuesta)
+      let json = await respuesta.json()
+      console.log(json)
+      try {
+        Object.values(json.data).forEach(key => {
+                const pDato = document.createTextNode(key.ramMemory + ' ' + key.speed + ' ' + key.name);             
+                const p = document.createElement('p');
+                arrayN[a] = (key.ramMemory + ' ' + key.speed + ' ' + key.name) 
+                p.id = a;                     
+                p.appendChild(pDato);
+                ramDiv.appendChild(p);
+                document.getElementById(a).addEventListener('click', idNuevos);
+                a = a + 1 ;
+            })       
+      } catch (error) {
+        console.log('Error:', error)
+      }
+        }
+
+        async function hdd() {
+          let respuesta = await fetch('http://demo6292426.mockable.io/hddList')
+          console.log(respuesta)
+          let json = await respuesta.json()
+          console.log(json)
+
+          try{
+            Object.values(json.data).forEach(key => {
+              const pDato = document.createTextNode(key.size + ' ' + key.speed + ' ' + key.provider);
+              const p = document.createElement('p');
+              arrayN[a]=(key.size + ' ' + key.speed + ' ' + key.provider) 
+              p.id = a;
+              p.appendChild(pDato);
+              hddDiv.appendChild(p);
+              document.getElementById(a).addEventListener('click', idNuevos);
+              a = a + 1 ;
+            })
+          } catch (error) {
+        console.log('Error:', error)
+      }
+        }
+
+        async function procesadores() {
+          let respuesta = await fetch('http://demo6292426.mockable.io/processors')
+          console.log(respuesta)
+          let json = await respuesta.json()
+          console.log(json)
+
+          try{
+            Object.values(json.data).forEach(key => {
+              const pDato = document.createTextNode(key.architecture + ' ' + key.provider + ' ' + key.name);
+              const p = document.createElement('p');
+              arrayN[a]=(key.architecture + ' ' + key.provider + ' ' + key.name) 
+              p.id = a;       
+              p.appendChild(pDato);
+              procesadorDiv.appendChild(p);
+              document.getElementById(a).addEventListener('click', idNuevos);//agreagar los id de los elemenos a comprar
+              a = a + 1 ;
+            })
+          } catch (error) {
+        console.log('Error:', error)
+      }
+        }
+        
+      
+    document.getElementById("botonRam").addEventListener('click', ram);
+    document.getElementById("botonHdd").addEventListener('click', hdd);
+    document.getElementById("botonProcesador").addEventListener('click', procesadores);
+   
+    document.body.appendChild(modalDiv)
+    document.body.append(listaSeleccionados)
+    listaSeleccionados.appendChild(pTitulo);
+    modalDiv.appendChild(botonAceptar);
+    modalDiv.appendChild(botonCancelar);
+    
+
+  let modal = document.getElementById("modalDiv")
+
+  document.getElementById("botonRam").onclick = () => {
+    modalDiv.innerHTML = '';
+    modalDiv.appendChild(ramDiv);
+    ramDiv.appendChild(botonAceptar);
+    ramDiv.appendChild(botonCancelar);
+    modal.style.display = "block";     
+  }
+
+  document.getElementById("botonHdd").onclick = () => {
+    modalDiv.innerHTML = '';
+    modalDiv.appendChild(hddDiv);
+    hddDiv.appendChild(botonAceptar);
+    modal.style.display = "block";
+  }
+
+  document.getElementById("botonProcesador").onclick = () => {
+    modalDiv.innerHTML = '';
+    modalDiv.appendChild(procesadorDiv);
+    procesadorDiv.appendChild(botonAceptar);
+    modal.style.display = "block";
+  }
+
+  document.getElementById("botonAceptar").onclick = () => {
+    modalDiv.appendChild(botonAceptar);
+    modal.style.display = "none";
+  }
+
+  document.getElementById("botonCancelar").onclick = () => {
+    modalDiv.appendChild(botonCancelar);
+    modal.style.display = "none";
+  }
+
+  window.onclick = (event) => {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+</script>
+ 
+</body>
+</html>
